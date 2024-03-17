@@ -1,10 +1,12 @@
 #include <iostream>
-#include "Network/Network.h"
+#include "SimulationEngine/Simulation.h"
+#include "Neuron/Neuron.h"
+#include "Synapse/StaticSynapse.h"
 
 int main() {
-    auto network = Network{100, 20, 0.01};
+    auto network = Network<Neuron, StaticSynapse>{100, 20, 0.01};
     network.initialize();
-    std::cout << network << std::endl;
+    network.print();
     std::cout << network.getNeurons() << std::endl;
     std::cout << network.getSynapses() << std::endl;
     return 0;

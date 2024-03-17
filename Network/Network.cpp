@@ -1,28 +1,35 @@
 #include "Network.h"
 #include "../Utility/RandomNumberGenerator.h"
 
-
-Network::Network(size_t excitatoryNumber, size_t inhibitoryNumber, double connectionProbability) :
+template<NeuronLike NeuronClass, SynapseLike SynapseClass>
+Network<NeuronClass, SynapseClass>::Network(size_t excitatoryNumber, size_t inhibitoryNumber, double connectionProbability) :
     N_EXC(excitatoryNumber),
     N_INH(inhibitoryNumber),
     P_CON(connectionProbability),
-    synapses(std::vector<Synapse>{}),
-    neurons(std::vector<Neuron>{}){
+    synapses(std::vector<SynapseClass>{}),
+    neurons(std::vector<NeuronClass>{}){
 }
 
-Network::~Network() = default;
+template<NeuronLike NeuronClass, SynapseLike SynapseClass>
+Network<NeuronClass, SynapseClass>::~Network() = default;
 
-size_t Network::getExcitatoryCount() {return N_EXC;}
+template<NeuronLike NeuronClass, SynapseLike SynapseClass>
+size_t Network<NeuronClass, SynapseClass>::getExcitatoryCount() {return N_EXC;}
 
-size_t Network::getInhibitoryCount() {return N_INH;}
+template<NeuronLike NeuronClass, SynapseLike SynapseClass>
+size_t Network<NeuronClass, SynapseClass>::getInhibitoryCount() {return N_INH;}
 
-double Network::getConnectionProbability() {return P_CON;}
+template<NeuronLike NeuronClass, SynapseLike SynapseClass>
+double Network<NeuronClass, SynapseClass>::getConnectionProbability() {return P_CON;}
 
-std::vector<Neuron>& Network::getNeurons() {return neurons;}
+template<NeuronLike NeuronClass, SynapseLike SynapseClass>
+std::vector<NeuronClass>& Network<NeuronClass, SynapseClass>::getNeurons() {return neurons;}
 
-std::vector<Synapse>& Network::getSynapses() {return synapses;}
+template<NeuronLike NeuronClass, SynapseLike SynapseClass>
+std::vector<SynapseClass>& Network<NeuronClass, SynapseClass>::getSynapses() {return synapses;}
 
-void Network::initialize() {
+template<NeuronLike NeuronClass, SynapseLike SynapseClass>
+void Network<NeuronClass, SynapseClass>::initialize() {
     auto rng = RandomNumberGenerator{};
     index_t synapseIndex = 0;
 
@@ -58,12 +65,15 @@ void Network::initialize() {
     }
 }
 
-std::ostream &operator<<(std::ostream &os, const Network &network) {
-    os << "#Excitatory: " << network.N_EXC << std::endl;
-    os << "#Inhibitory: " << network.N_INH << std::endl;
-    os << "Connection Probability: " << network.P_CON << std::endl;
-    os << "#Synapses: " << network.synapses.size() << std::endl;
-    return os;
+template<NeuronLike NeuronClass, SynapseLike SynapseClass>
+void Network<NeuronClass, SynapseClass>::print() {
+    std::cout << "#Excitatory: " << N_EXC << std::endl;
+    std::cout << "#Inhibitory: " << N_INH << std::endl;
+    std::cout << "Connection Probability: " << P_CON << std::endl;
+    std::cout << "#Synapses: " << synapses.size() << std::endl;
 }
+
+template<NeuronLike NeuronClass, SynapseLike SynapseClass>
+void Network<NeuronClass, SynapseClass>::run(double currentTimeStep, const double DELTA_TIME) {}
 
 

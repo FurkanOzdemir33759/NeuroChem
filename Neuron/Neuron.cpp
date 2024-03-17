@@ -26,7 +26,7 @@ void Neuron::setType(NEURON_TYPE _type) { type = _type;}
 
 index_t Neuron::getIndex() {return index;}
 
-void Neuron::setIndex(index_t _index) {index = _index;}
+void Neuron::setIndex(index_t _index) { index = _index;}
 
 std::vector<index_t>& Neuron::getIncomingSynapses() {return synapsesIn;}
 
@@ -36,7 +36,7 @@ std::vector<index_t>& Neuron::getOutgoingSynapses() {return synapsesOut;}
 
 void Neuron::addSynapseOut(index_t synapseOut) {synapsesOut.push_back(synapseOut);}
 
-void Neuron::setSynapses(std::vector<Synapse>* _synapses) {synapses = _synapses;}
+void Neuron::setSynapses(std::vector<Synapse>* _synapses) { synapses = _synapses;}
 
 std::ostream &operator<<(std::ostream &os, const Neuron &neuron) {
     os << "Neuron " << neuron.index << std::endl;

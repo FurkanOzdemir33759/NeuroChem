@@ -3,15 +3,23 @@
 #include <vector>
 #include "../Utility/ContainerPrinter.h"
 #include "../Neuron/Neuron.h"
-#include "../Synapse/Synapse.h"
+#include "../Synapse/StaticSynapse.h"
+#include <concepts>
 
+template<typename T>
+concept NeuronLike = std::derived_from<T, Neuron>;
+
+template<typename T>
+concept SynapseLike = std::derived_from<T, Synapse>;
+
+template<NeuronLike NeuronClass, SynapseLike SynapseClass>
 class Network {
 private:
     size_t N_EXC;
     size_t N_INH;
     double P_CON;
-    std::vector<Synapse> synapses;
-    std::vector<Neuron> neurons;
+    std::vector<SynapseClass> synapses;
+    std::vector<NeuronClass> neurons;
 public:
     Network(size_t excitatoryNumber, size_t inhibitoryNumber, double connectionProbability);
     ~Network();
@@ -22,12 +30,14 @@ public:
 
     double getConnectionProbability();
 
-    std::vector<Neuron>& getNeurons();
+    std::vector<NeuronClass>& getNeurons();
 
-    std::vector<Synapse>& getSynapses();
+    std::vector<SynapseClass>& getSynapses();
 
     void initialize();
 
-    friend std::ostream& operator<<(std::ostream& os, const Network& network);
+    void print();
+
+    void run(double currentTimeStep, const double DELTA_TIME);
 };
 

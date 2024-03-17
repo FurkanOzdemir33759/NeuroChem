@@ -15,4 +15,9 @@ add_executable(NeuroChemSim main.cpp
         Neuron/Neuron.fwd.h
         Synapse/Synapse.fwd.h
         Utility/ContainerPrinter.h
+        SimulationEngine/Simulation.cpp
+        SimulationEngine/Simulation.h
+        Synapse/StaticSynapse.cpp
+        Synapse/StaticSynapse.h
+        Synapse/StaticSynapse.h
 )

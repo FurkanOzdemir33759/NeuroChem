@@ -47,5 +47,6 @@ public:
     SYNAPSE_TYPE determineType();
 
     friend std::ostream& operator<<(std::ostream& os, const Synapse& synapse);
+
 };
 
